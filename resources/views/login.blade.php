@@ -1,94 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Bootstrap 5 Admin &amp; Dashboard Template">
-	<meta name="author" content="Bootlab">
-	<title>Login | UNTUNG YASRIL</title>
-	<link rel="canonical" href="pages-sign-in.html" />
-	<link rel="shortcut icon" href="img/favicon.ico">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
-	<link class="stylesheet" href="{{url('app/css/light.css')}}" rel="stylesheet">
-	<!-- <script src="{{url('app/js/settings.js')}}"></script> -->
-	<!-- END SETTINGS -->
-<script>
-    (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:2120269,hjsv:6};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-Q3ZYEKLQ68"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  gtag('config', 'G-Q3ZYEKLQ68');
-</script></head>
-<!--
-  HOW TO USE:
-  data-theme: default (default), dark, light
-  data-layout: fluid (default), boxed
-  data-sidebar-position: left (default), right
-  data-sidebar-behavior: sticky (default), fixed, compact
--->
+    <title>Login | UNTUNG YASRIL</title>
 
-<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
-	<div class="main d-flex justify-content-center w-100">
-		<main class="content d-flex p-0">
-			<div class="container d-flex flex-column">
-				<div class="row h-100">
-					<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-						<div class="d-table-cell align-middle">
+    <link rel="shortcut icon" href="img/favicon.ico">
 
-							<div class="card">
-								<div class="card-body">
-                                    <div class="text-center mt-1">
-                                        <h1 style="font-weight: bold; color: #696969">LOGIN PAK UNTUNG</h1>
-                                    </div>
-									<div class="m-sm-4">
-										<form id="login" class="form-horizontal" method="post"
-											action="{{url('submit-login')}}" enctype="multipart/form-data">
-											{{csrf_field()}}
-											<div class="mb-3">
-												<label class="form-label">Username</label>
-												<input class="form-control form-control-lg" type="text" name="username" placeholder="Enter your username" />
-											</div>
-											<div class="mb-3">
-												<label class="form-label">Password</label>
-												<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" />
-												<small> </small>
-											</div>
-											<div>
-											</div>
-											<div class="text-center mt-3">
-											 	<button type="submit" class="btn btn-primary w-100">Submit</button>
-											</div>
-										</form>
-									</div>
-                                    <div class="text-center mt-1">
-                                        <p>@2025 - Duratu Tech</p>
-                                    </div>
-								</div>
-							</div>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
-	</div>
+    <!-- CSS -->
+    <link href="{{ url('app/css/light.css') }}" rel="stylesheet">
 
-	<script src="{{url('js/app.js')}}"></script>
+    <style>
+
+        body{
+            background: linear-gradient(135deg,#f5f7fb,#e4ecf7);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .main{
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        .login-card{
+            border-radius:12px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+            border:none;
+        }
+
+        .login-title{
+            font-weight:600;
+            color:#333;
+            margin-bottom:5px;
+        }
+
+        .login-subtitle{
+            font-size:14px;
+            color:#777;
+        }
+
+        .form-label{
+            font-weight:500;
+        }
+
+        .form-control{
+            border-radius:8px;
+            padding:10px 12px;
+        }
+
+        .btn-login{
+            border-radius:8px;
+            font-weight:500;
+            padding:10px;
+        }
+
+        .footer-login{
+            font-size:13px;
+            color:#888;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="main">
+
+    <main class="content w-100">
+
+        <div class="container">
+
+            <div class="row justify-content-center">
+
+                <div class="col-md-6 col-lg-4">
+
+                    <div class="card login-card">
+
+                        <div class="card-body p-4">
+
+                            <!-- Title -->
+                            <div class="text-center mb-4">
+                                <h3 class="login-title">Login Sistem</h3>
+                                <p class="login-subtitle">UNTUNG YASRIL</p>
+                            </div>
+
+                            <!-- Form -->
+                            <form id="login" method="post" action="{{ url('submit-login') }}">
+                                {{ csrf_field() }}
+
+                                <div class="mb-3">
+                                    <label class="form-label">Username</label>
+                                    <input
+                                        type="text"
+                                        name="username"
+                                        class="form-control form-control-lg"
+                                        placeholder="Masukkan username"
+                                        required
+                                    >
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Password</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        class="form-control form-control-lg"
+                                        placeholder="Masukkan password"
+                                        required
+                                    >
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-login">
+                                        Login
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="text-center pb-3 footer-login">
+                            © 2025 - Duratu Tech
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="{{ url('js/app.js') }}"></script>
 
 </body>
-
-
-<!-- Mirrored from appstack.bootlab.io/pages-sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Nov 2021 07:53:10 GMT -->
 </html>

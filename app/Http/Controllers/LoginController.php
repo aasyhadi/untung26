@@ -65,7 +65,7 @@ class LoginController extends Controller
         return redirect('login')->with('error', 'Username dan Password Tidak Sesuai');
     }
 
-    function generate_user_menu(){
+    /* function generate_user_menu(){
         $id_user = Auth::user()->id; $menu_user = array();
         $menu_induk = DB::table('user_role as a')->join('role_menu as b','a.id_role','=','b.id_role')->join('menu as c','c.id_menu','=','b.id_menu')->join('menu as d','c.id_menu_induk','=','d.id_menu')->where('a.id_user',$id_user)->groupBy('d.id_menu','d.nama_menu','d.url','d.id_menu_induk','d.urutan','d.icon','d.uuid')->orderBy('d.urutan')->select('d.*')->get();
         foreach($menu_induk as $mni){
@@ -74,7 +74,84 @@ class LoginController extends Controller
             foreach($menu_anak as $mna){ $menu_user[$mni->id_menu]['child'][] = ['id_menu'=>$mna->id_menu,'url'=>$mna->url,'nama_menu'=>$mna->nama_menu]; }
         }
         Session::put('menu7890_2386', json_encode($menu_user));
+    } */
+
+    function generate_user_menu()
+    {
+        $id_user   = Auth::user()->id;
+        $menu_user = [];
+
+        $menu_induk = DB::table('user_role as a')
+            ->join('role_menu as b', 'a.id_role', '=', 'b.id_role')
+            ->join('menu as c', 'c.id_menu', '=', 'b.id_menu')
+            ->join('menu as d', 'c.id_menu_induk', '=', 'd.id_menu')
+            ->where('a.id_user', $id_user)
+            ->groupBy(
+                'd.id_menu',
+                'd.nama_menu',
+                'd.url',
+                'd.id_menu_induk',
+                'd.urutan',
+                'd.icon',
+                'd.uuid'
+            )
+            ->orderBy('d.urutan')
+            ->select('d.id_menu',
+                'd.nama_menu',
+                'd.url',
+                'd.id_menu_induk',
+                'd.urutan',
+                'd.icon',
+                'd.uuid')
+            ->get();
+
+        foreach ($menu_induk as $mni) {
+
+            $menu_user[$mni->id_menu] = [
+                'id_menu'   => $mni->id_menu,
+                'url'       => $mni->url,
+                'icon'      => $mni->icon,
+                'nama_menu' => $mni->nama_menu,
+                'child'     => []
+            ];
+
+            $menu_anak = DB::table('user_role as a')
+                ->join('role_menu as b', 'a.id_role', '=', 'b.id_role')
+                ->join('menu as c', 'c.id_menu', '=', 'b.id_menu')
+                ->join('menu as d', 'c.id_menu_induk', '=', 'd.id_menu')
+                ->where('a.id_user', $id_user)
+                ->where('c.id_menu_induk', $mni->id_menu)
+                ->groupBy(
+                    'c.nama_menu',
+                    'c.id_menu',
+                    'c.url',
+                    'c.urutan',
+                    'c.id_menu_induk'
+                )
+                ->orderBy('c.id_menu_induk')
+                ->orderBy('c.urutan')
+                ->select(
+                    'c.nama_menu',
+                    'c.id_menu',
+                    'c.url',
+                    'c.urutan',
+                    'c.id_menu_induk'
+                )
+                ->get();
+
+            foreach ($menu_anak as $mna) {
+
+                $menu_user[$mni->id_menu]['child'][] = [
+                    'id_menu'   => $mna->id_menu,
+                    'url'       => $mna->url,
+                    'nama_menu' => $mna->nama_menu
+                ];
+            }
+        }
+
+        Session::put('menu7890_2386', json_encode($menu_user));
     }
+
 
     function logout(){ Auth::logout(); Session::flush(); setcookie('buker_cookie', '', time() + 1, '/'); return redirect('/'); }
     function profile_user(){ $pagetitle='Profil'; $smalltitle=''; return view('setting.profile', compact('pagetitle','smalltitle')); }
