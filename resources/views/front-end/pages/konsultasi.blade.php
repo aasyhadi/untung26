@@ -26,8 +26,10 @@
         <p>✅ &nbsp;Konsultasi langsung via WhatsApp (klik tombol di bawah)</p>
     </div>
 
-    <a href="{{ wa_link(site_setting('whatsapp_number'), 'Halo Pak Untung, saya ingin konsultasi online.') }}" target="_blank" class="btn-whatsapp">
-        <b><i class="fab fa-whatsapp fa-2x mb-2 fa-fw"></i></b>&nbsp; Konsultasi Langsung
+    <a href="{{ wa_link(site_setting('whatsapp_number'), site_setting('whatsapp_default_message')) }}"
+            target="_blank"
+            class="btn-whatsapp">
+            <i class="fab fa-whatsapp" style="margin-right:8px;"></i> Konsultasi Sekarang
     </a>
 </div>
 @endsection

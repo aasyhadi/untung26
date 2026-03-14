@@ -708,7 +708,7 @@
 
                 <div class="hero-actions">
                     <a
-                        href="{{ wa_link(site_setting('whatsapp_number'), 'Halo Pak Untung, saya ingin konsultasi online.') }}"
+                        href="{{ wa_link(site_setting('whatsapp_number'), site_setting('whatsapp_default_message')) }}"
                         target="_blank"
                         class="btn-wa"
                     >
@@ -1002,7 +1002,7 @@
             </div>
 
             <a
-                href="{{ wa_link(site_setting('whatsapp_number'), 'Halo Pak Untung, saya ingin berkonsultasi.') }}"
+                href="{{ wa_link(site_setting('whatsapp_number'), site_setting('whatsapp_default_message')) }}"
                 target="_blank"
                 class="btn-wa"
             >

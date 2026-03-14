@@ -38,58 +38,6 @@
             </div>
         </div><br>
 
-    <h2>Pelatihan On Progres</h2>
-    <div class="jadwal-container">
-        @forelse($jadwalPelatihan as $jadwal)
-        <div class="jadwal-item">
-            <div class="jadwal-header">{{ $jadwal->nama_pelatihan }}</div>
-            <div class="jadwal-body">
-                @if($jadwal->tanggal >= today())
-                    <p class="highlight-buka"><strong>BUKA</strong></p>
-                @else
-                    <p class="highlight-tutup"><strong>TUTUP</strong></p>
-                @endif
-                <table class="jadwal-table">
-                    <tr>
-                        <td><strong>Tanggal</strong></td>
-                        <td>
-                            {{ $jadwal->tanggal ? \Carbon\Carbon::parse($jadwal->tanggal)->translatedFormat('d F Y') : '-' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Durasi</strong></td>
-                        <td>{{ $jadwal->durasi }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Narasumber</strong></td>
-                        <td>{{ $jadwal->narasumber ?? '-' }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Biaya Rp.</strong></td>
-                        <td>{{ number_format($jadwal->biaya, 0, ',', '.') }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Lokasi</strong></td>
-                        <td>{{ $jadwal->lokasi }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Metode</strong></td>
-                        @if($jadwal->metode == 4)
-                            <td>Online</td>
-                        @elseif($jadwal->metode == 5)
-                            <td>Offline</td>
-                        @elseif($jadwal->metode == 6)
-                            <td>Hybrid</td>
-                        @endif
-                    </tr>
-                </table>
-            </div>
-        </div><br>
-        @empty
-        <p>Tidak ada jadwal pelatihan tersedia saat ini.</p>
-        @endforelse
-    </div><br>
-
     <h2>Program Pelatihan yang Tersedia</h2>
         <p>✅ Manajemen Proyek Konstruksi</p>
         <p>✅ Keselamatan dan Kesehatan Kerja (K3) Konstruksi</p>
