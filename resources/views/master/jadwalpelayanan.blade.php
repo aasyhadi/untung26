@@ -133,6 +133,7 @@ $metode = DB::table('sub_kategori')
 		    responsive: true,
 		    fixedHeader: true,
 		    serverSide: true,
+            ordering: false,
 		    ajax: "{{url('jadwal-pelayanan/dt')}}",
 		    "iDisplayLength": 10,
 		    columns: [
