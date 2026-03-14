@@ -19,16 +19,27 @@ class JadwalPelayananController extends Controller
     function datatable(Request $r){
 
         $filter = "";
-        if (request()->has('search')) {
+        /* if (request()->has('search')) {
             $search = request('search');
             $keyword = $search['value'];
             if(strlen($keyword)>=3){
                 $keyword = strtolower($keyword);
                 $filter = " and (lower(nama_pelatihan) like '%$keyword%' or lower(nama_pelatihan) like '%$keyword%') ";
             }
+        } */
+
+        if (request()->has('search')) {
+            $search  = request('search');
+            $keyword = $search['value'];
+            if(strlen($keyword) >= 3){
+                $keyword = strtolower($keyword);
+                $filter = " WHERE (
+                                LOWER(nama_pelatihan) LIKE '%$keyword%'
+                            ) ";
+            }
         }
 
-        $sql_union = "select * from jadwal_pelatihan $filter order by tanggal DESC";
+        $sql_union = "select * from jadwal_pelatihan $filter order by tanggal desc";
         $query = DB::table(DB::raw("($sql_union) as x"))
                     ->select(['nama_pelatihan','deskripsi','biaya','narasumber','lokasi',
                         'metode','cover','tanggal','durasi','uuid']);
