@@ -59,52 +59,36 @@ class JadwalPelayananController extends Controller
 
     function datatable(Request $r){
 
-        $filter = "";
+        $query = DB::table('jadwal_pelatihan')
+            ->select([
+                'nama_pelatihan','deskripsi','biaya','narasumber','lokasi',
+                'metode','cover','tanggal','durasi','uuid'
+            ])
+            ->orderBy('tanggal','desc');
+
         if ($r->has('search')) {
             $keyword = $r->search['value'];
             if(strlen($keyword) >= 3){
                 $keyword = strtolower($keyword);
-                $filter .= " AND (
-                    LOWER(nama_pelatihan) LIKE '%$keyword%'
-                    OR LOWER(deskripsi) LIKE '%$keyword%'
-                )";
+                $query->whereRaw("LOWER(nama_pelatihan) LIKE ?", ["%$keyword%"]);
             }
         }
 
-        $sql_union = "
-            SELECT *
-            FROM jadwal_pelatihan
-            WHERE 1=1
-            $filter
-            ORDER BY tanggal DESC
-        ";
-
-        $query = DB::table(DB::raw("($sql_union) as x"))
-            ->select([
-                'nama_pelatihan','deskripsi','biaya','narasumber','lokasi',
-                'metode','cover','tanggal','durasi','uuid'
-            ]);
-
         return DataTables::of($query)
             ->addColumn('status', function ($row) {
-                $status = ($row->tanggal >= date('Y-m-d')) ?
-                    '<span style="color:white;background:green;padding:5px 10px;border-radius:5px;">BUKA</span>' :
-                    '<span style="color:black;background:yellow;padding:5px 10px;border-radius:5px;">TUTUP</span>';
-                return $status;
+                return ($row->tanggal >= date('Y-m-d'))
+                ? '<span style="color:white;background:green;padding:5px 10px;border-radius:5px;">BUKA</span>'
+                : '<span style="color:black;background:yellow;padding:5px 10px;border-radius:5px;">TUTUP</span>';
             })
-            ->addColumn('action', function ($query) {
+            ->addColumn('action', function ($row) {
                 $edit=""; $delete="";
                 if($this->ucu()){
-                    $edit = '<button data-bs-toggle="modal" data-uuid="'.$query->uuid.'" data-bs-target="#modal-edit" class="btn btn-outline-secondary btn-sm"><i class="las la-pen"></i></button>';
+                    $edit='<button data-uuid="'.$row->uuid.'" data-bs-toggle="modal" data-bs-target="#modal-edit" class="btn btn-outline-secondary btn-sm"><i class="las la-pen"></i></button>';
                 }
                 if($this->ucd()){
-                    $delete = '<button data-uuid="'.$query->uuid.'" class="btn btn-outline-secondary btn-sm btn-konfirm-delete"><i class="las la-trash"></i></button>';
+                    $delete='<button data-uuid="'.$row->uuid.'" class="btn btn-outline-secondary btn-sm btn-konfirm-delete"><i class="las la-trash"></i></button>';
                 }
-                $action = $edit." ".$delete;
-                if ($action==""){
-                    $action='<a href="#"><i class="la la-lock"></i></a>';
-                }
-                return $action;
+                return $edit.' '.$delete;
             })
             ->addIndexColumn()
             ->rawColumns(['action','status'])
