@@ -28,7 +28,7 @@ class JadwalPelayananController extends Controller
             }
         }
 
-        $sql_union = "select * from jadwal_pelatihan $filter order by tanggal asc";
+        $sql_union = "select * from jadwal_pelatihan $filter order by tanggal DESC";
         $query = DB::table(DB::raw("($sql_union) as x"))
                     ->select(['nama_pelatihan','deskripsi','biaya','narasumber','lokasi',
                         'metode','cover','tanggal','durasi','uuid']);
