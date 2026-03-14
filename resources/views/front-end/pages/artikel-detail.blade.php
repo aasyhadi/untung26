@@ -262,7 +262,7 @@
 
             @forelse($artikels as $item)
                 <div class="article-other-item">
-                    <a href="{{ url('/artikel/' . $item->slug) }}">
+                    <a href="{{ url('/artikel-konstruksi/' . $item->slug) }}">
                         {{ $item->judul }}
                     </a>
                     <div class="article-other-date">

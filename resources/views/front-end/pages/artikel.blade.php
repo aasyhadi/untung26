@@ -173,7 +173,7 @@
 
 <div class="sub-hero">
     <div class="sub-hero-container">
-        <h1>ARTIKEL</h1>
+        <h1>ARTIKEL KONSTRUKSI</h1>
     </div>
 </div>
 
@@ -200,7 +200,7 @@
                         </p>
 
                         <div class="article-card-footer">
-                            <a href="{{ url('/artikel/' . $artikel->slug) }}" class="read-more-btn">
+                            <a href="{{ url('/artikel-konstruksi/' . $artikel->slug) }}" class="read-more-btn">
                                 Baca selengkapnya
                             </a>
                         </div>

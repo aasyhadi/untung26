@@ -2,30 +2,57 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Bootstrap 5 Admin &amp; Dashboard Template">
-	<meta name="author" content="Bootlab">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<title>{{$pagetitle}} | UNTUNG YASRIL</title>
+    <!-- Mobile Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="canonical" href="pages-blank.html" />
-	<link rel="shortcut icon" href="img/favicon.ico">
+    <!-- SEO Title -->
+    <title>{{$pagetitle}} | Konsultan Konstruksi UNTUNG YASRIL</title>
 
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet">
-	<link class="js-stylesheet" href="{{url('app/css/light.css')}}" rel="stylesheet">
-	<link class="stylesheet" href="{{url('app/css/light.css')}}" rel="stylesheet">
-	<link class="stylesheet" href="{{url('css/custom.css')}}" rel="stylesheet">
-	<link class="stylesheet" href="{{url('css/passtrength.css')}}" rel="stylesheet">
-	<link class="stylesheet" href="{{url('vendor/selectize/selectize.css')}}" rel="stylesheet">
-	<link class="stylesheet" href="{{url('vendor/selectize/selectize.bootstrap5.css')}}" rel="stylesheet">
-	<link class="stylesheet" href="{{url('vendor/jquery-confirm.min.css')}}" rel="stylesheet">
-	<link class="stylesheet" href="{{url('vendor/lineawesome/css/line-awesome.min.css')}}" rel="stylesheet">
-	<!-- END SETTINGS -->
+    <!-- SEO Meta -->
+    <meta name="description" content="UNTUNG YASRIL menyediakan layanan konsultasi konstruksi, pengendalian kontrak proyek, pelatihan konstruksi, serta pendampingan manajemen proyek profesional di Indonesia.">
+    <meta name="keywords" content="konsultan konstruksi, pengendalian kontrak konstruksi, manajemen proyek konstruksi, pelatihan konstruksi, jasa konsultasi konstruksi">
+    <meta name="author" content="Untung Yasril">
 
-    <!-- Untuk Datepicker -->
-	<link class="stylesheet" href="{{url('css/jquery-ui.css')}}" rel="stylesheet">
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{url('img/favicon.ico')}}">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:title" content="{{$pagetitle}} | UNTUNG YASRIL">
+    <meta property="og:description" content="Layanan konsultasi konstruksi, pengendalian kontrak proyek, dan pelatihan konstruksi profesional.">
+    <meta property="og:image" content="{{url('img/og-image.jpg')}}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{$pagetitle}} | UNTUNG YASRIL">
+    <meta name="twitter:description" content="Konsultan konstruksi dan pengendalian kontrak proyek profesional.">
+    <meta name="twitter:image" content="{{url('img/og-image.jpg')}}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link class="js-stylesheet" href="{{url('app/css/light.css')}}" rel="stylesheet">
+    <link class="stylesheet" href="{{url('css/custom.css')}}" rel="stylesheet">
+    <link class="stylesheet" href="{{url('css/passtrength.css')}}" rel="stylesheet">
+    <link class="stylesheet" href="{{url('vendor/selectize/selectize.css')}}" rel="stylesheet">
+    <link class="stylesheet" href="{{url('vendor/selectize/selectize.bootstrap5.css')}}" rel="stylesheet">
+    <link class="stylesheet" href="{{url('vendor/jquery-confirm.min.css')}}" rel="stylesheet">
+    <link class="stylesheet" href="{{url('vendor/lineawesome/css/line-awesome.min.css')}}" rel="stylesheet">
+
+    <!-- Datepicker -->
+    <link class="stylesheet" href="{{url('css/jquery-ui.css')}}" rel="stylesheet">
+
     <script src="{{url('js/jquery-3.6.0.min.js')}}"></script>
     <script src="{{url('js/jquery-ui.js')}}"></script>
 

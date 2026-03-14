@@ -861,7 +861,7 @@
                 <h2>Artikel terbaru</h2>
                 <p>Insight, catatan lapangan, dan referensi praktis seputar jasa konstruksi.</p>
             </div>
-            <a href="{{ url('/artikel') }}">Lihat semua</a>
+            <a href="{{ url('/artikel-konstruksi') }}">Lihat semua</a>
         </div>
 
         @if($headlineArtikel)
@@ -885,7 +885,7 @@
                             {{ \Illuminate\Support\Str::limit($headlineArtikel->ringkasan ?: strip_tags($headlineArtikel->isi_artikel), 220) }}
                         </p>
 
-                        <a class="btn-solid" href="{{ url('/artikel/' . $headlineArtikel->slug) }}">
+                        <a class="btn-solid" href="{{ url('/artikel-konstruksi/' . $headlineArtikel->slug) }}">
                             <i class="fas fa-book-reader"></i>
                             Baca artikel utama
                         </a>
@@ -909,7 +909,7 @@
 
                                 <h4>{{ $artikel->judul }}</h4>
 
-                                <a href="{{ url('/artikel/' . $artikel->slug) }}" class="headline-side-link">
+                                <a href="{{ url('/artikel-konstruksi/' . $artikel->slug) }}" class="headline-side-link">
                                     Baca artikel
                                 </a>
                             </div>

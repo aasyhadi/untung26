@@ -12,8 +12,8 @@ use Carbon\Carbon;
 Route::get('/', 'FrontPageController@home')->name('home.public');
 Route::get('/homepage', function () { return redirect('/'); });
 Route::get('/profil', function () { return view('front-end.pages.profil'); })->name('profil.public');
-Route::get('/artikel', 'FrontPageController@artikels');
-Route::get('/artikel/{slug}', 'FrontPageController@artikelDetail');
+Route::get('/artikel-konstruksi', 'FrontPageController@artikels');
+Route::get('/artikel-konstruksi/{slug}', 'FrontPageController@artikelDetail');
 Route::get('/produk', 'FrontPageController@produks');
 Route::get('/produk/{slug}', 'FrontPageController@produkDetail');
 
@@ -141,7 +141,7 @@ Route::group(["middleware"=>['auth.login','auth.menu']], function(){
 Route::get('/sitemap.xml', function () {
     $urls = [
         ['loc' => url('/'), 'lastmod' => Carbon::now()->toDateString(), 'changefreq' => 'weekly', 'priority' => '1.0'],
-        ['loc' => url('/artikel'), 'lastmod' => Carbon::now()->toDateString(), 'changefreq' => 'weekly', 'priority' => '0.8'],
+        ['loc' => url('/artikel-konstruksi'), 'lastmod' => Carbon::now()->toDateString(), 'changefreq' => 'weekly', 'priority' => '0.8'],
         ['loc' => url('/produk'), 'lastmod' => Carbon::now()->toDateString(), 'changefreq' => 'weekly', 'priority' => '0.8'],
         ['loc' => url('layanan/konsultasi'), 'lastmod' => Carbon::now()->toDateString(), 'changefreq' => 'monthly', 'priority' => '0.6'],
         ['loc' => url('layanan/pelatihan'), 'lastmod' => Carbon::now()->toDateString(), 'changefreq' => 'monthly', 'priority' => '0.8'],
