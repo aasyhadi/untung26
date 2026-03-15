@@ -51,7 +51,7 @@ class HomeController extends Controller
             'nearestJadwal',
             'site',
             'topArtikel',
-            'topProduk',
+            'topProduk'
         ));
    }
 }
