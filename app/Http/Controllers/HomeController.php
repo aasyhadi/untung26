@@ -19,6 +19,8 @@ class HomeController extends Controller
             'produk_publish' => Produk::where('status', 'publish')->count(),
             'konsultasi_baru' => Konsultasi::where('status', 7)->count(),
             'jadwal_aktif' => JadwalPelatihan::whereDate('tanggal', '>=', now()->toDateString())->count(),
+            'artikel_views' => Artikel::sum('view_count'),
+            'produk_views' => Produk::sum('view_count'),
         ];
 
         $latestKonsultasi = Konsultasi::orderByDesc('id')->limit(5)->get();
@@ -30,6 +32,16 @@ class HomeController extends Controller
             ->get();
         $site = SiteSetting::first();
 
+        $topArtikel = Artikel::where('status', 'publish')
+            ->orderByDesc('view_count')
+            ->take(5)
+            ->get();
+
+        $topProduk = Produk::where('status', 'publish')
+            ->orderByDesc('view_count')
+            ->take(5)
+            ->get();
+
         return view('home.index', compact(
             'pagetitle',
             'stats',
@@ -37,7 +49,9 @@ class HomeController extends Controller
             'latestArtikel',
             'latestProduk',
             'nearestJadwal',
-            'site'
+            'site',
+            'topArtikel',
+            'topProduk',
         ));
    }
 }

@@ -20,7 +20,7 @@ class MasterProdukController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Produk::query()->select(['id', 'judul', 'harga', 'status', 'uuid']);
+        $query = Produk::query()->select(['id', 'judul', 'harga', 'status', 'view_count', 'uuid']);
 
         if ($request->has('search')) {
             $keyword = trim(data_get($request->input('search'), 'value', ''));

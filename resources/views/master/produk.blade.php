@@ -4,7 +4,7 @@
 @section('content')
 <div class="row"><div class="col-12"><div class="card"><div class="card-header"><h5 class="card-title">{{$pagetitle}}</h5><h6 class="card-subtitle text-muted">{{$smalltitle}}</h6></div><div class="card-body">
 @if(ucc()) {{Html::btnModal('<i class="la la-plus-circle"></i> Tambah Produk','modal-tambah','primary')}} <hr> @endif
-<table id="datatable" class="table table-striped table-hover table-md" style="width:100%"><thead><tr><th>#</th><th>Judul</th><th>Harga</th><th>Status</th><th>Publik</th><th>Actions</th></tr></thead><tbody></tbody></table>
+<table id="datatable" class="table table-striped table-hover table-md" style="width:100%"><thead><tr><th>#</th><th>Judul</th><th>Harga</th><th>Status</th><th>Publik</th><th>Dilihat</th><th>Actions</th></tr></thead><tbody></tbody></table>
 </div></div></div></div>
 @endsection
 @section('modal')
@@ -51,7 +51,7 @@ resize:vertical;
 function initKonfirmDelete(){}
 $(function(){
 var $tabel1 = $('#datatable').DataTable({processing:true,responsive:true,fixedHeader:true,serverSide:true,ajax:"{{url($main_path.'/dt')}}",iDisplayLength:10,columns:[
-{data:'DT_RowIndex',orderable:false,searchable:false},{data:'judul',name:'judul'},{data:'harga',name:'harga'},{data:'status_badge',orderable:false,searchable:false},{data:'link_public',orderable:false,searchable:false},{data:'action',orderable:false,searchable:false,className:'text-center'}],});
+{data:'DT_RowIndex',orderable:false,searchable:false},{data:'judul',name:'judul'},{data:'harga',name:'harga'},{data:'status_badge',orderable:false,searchable:false},{data:'link_public',orderable:false,searchable:false},{data:'view_count',name:'view_count'},{data:'action',orderable:false,searchable:false,className:'text-center'}],});
 @if(ucc()) $('#form-tambah').ajaxForm({beforeSubmit:function(){disableButton('#form-tambah button[type=submit]')},success:function(r){if(r.status){$('#modal-tambah').modal('hide');successNotify(r.message);$tabel1.ajax.reload(null,true);}else{errorNotify(r.message);}enableButton('#form-tambah button[type=submit]')},error:function(xhr){enableButton('#form-tambah button[type=submit]');errorNotify(xhr.responseJSON?.message || 'Terjadi kesalahan');}}); @endif
 @if(ucu()) $('#modal-edit').on('show.bs.modal', function(e){var uuid=$(e.relatedTarget).data('uuid');$('#form-edit').clearForm();$('#preview-foto').attr('src','').hide();$.get("{{url($main_path.'/get-data')}}/"+uuid, function(respon){ if(respon.status){$('#form-edit #uuid').val(respon.data.uuid);$('#form-edit #judul').val(respon.data.judul);$('#form-edit #ringkasan').val(respon.data.ringkasan);$('#form-edit #ulasan').val(respon.data.ulasan);$('#form-edit #harga').val(respon.data.harga);$('#form-edit #nomor_wa_order').val(respon.data.nomor_wa_order);$('#form-edit #urutan').val(respon.data.urutan);$('#form-edit #status').val(respon.data.status); if(respon.data.foto){ $('#preview-foto').attr('src', adminMediaUrl(respon.data.foto)).show(); } }});});
 $('#form-edit').ajaxForm({beforeSubmit:function(){disableButton('#form-edit button[type=submit]')},success:function(r){if(r.status){$('#modal-edit').modal('hide');successNotify(r.message);$tabel1.ajax.reload(null,true);}else{errorNotify(r.message);}enableButton('#form-edit button[type=submit]')},error:function(xhr){enableButton('#form-edit button[type=submit]');errorNotify(xhr.responseJSON?.message || 'Terjadi kesalahan');}}); @endif

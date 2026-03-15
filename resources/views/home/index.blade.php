@@ -347,6 +347,37 @@ Dashboard
                 </div>
             </div>
         </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <div class="stat-top">
+                        <div>
+                            <div class="stat-label">View Artikel</div>
+                            <div class="stat-value">{{ number_format($stats['artikel_views']) }}</div>
+                        </div>
+                        <div class="stat-chip chip-indigo">VIEW</div>
+                    </div>
+                    <a href="{{ url('master-artikel') }}" class="stat-link">Lihat performa artikel</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <div class="stat-top">
+                        <div>
+                            <div class="stat-label">View Produk</div>
+                            <div class="stat-value">{{ number_format($stats['produk_views']) }}</div>
+                        </div>
+                        <div class="stat-chip chip-emerald">VIEW</div>
+                    </div>
+                    <a href="{{ url('master-produk') }}" class="stat-link">Lihat performa produk</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <div class="row g-3 mb-4">
@@ -459,6 +490,50 @@ Dashboard
                     @empty
                         <div class="empty-state">Belum ada jadwal aktif.</div>
                     @endforelse
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-1">
+            <div class="col-lg-6">
+                <div class="card dashboard-card h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">Artikel Terpopuler</h5>
+                        <a href="{{ url('master-artikel') }}" class="section-link">Kelola</a>
+                    </div>
+                    <div class="card-body">
+                        @forelse($topArtikel as $item)
+                            <div class="feed-item">
+                                <div class="feed-title">{{ $item->judul }}</div>
+                                <div class="feed-meta">
+                                    <i class="far fa-eye"></i> {{ number_format($item->view_count ?? 0) }} kali dilihat
+                                </div>
+                            </div>
+                        @empty
+                            <div class="empty-state">Belum ada data artikel populer.</div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card dashboard-card h-100">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="card-title">Produk Terpopuler</h5>
+                        <a href="{{ url('master-produk') }}" class="section-link">Kelola</a>
+                    </div>
+                    <div class="card-body">
+                        @forelse($topProduk as $item)
+                            <div class="feed-item">
+                                <div class="feed-title">{{ $item->judul }}</div>
+                                <div class="feed-meta">
+                                    <i class="far fa-eye"></i> {{ number_format($item->view_count ?? 0) }} kali dilihat
+                                </div>
+                            </div>
+                        @empty
+                            <div class="empty-state">Belum ada data produk populer.</div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>

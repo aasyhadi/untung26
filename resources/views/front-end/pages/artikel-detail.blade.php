@@ -188,6 +188,8 @@
             {{ optional($artikel->published_at)->translatedFormat('d F Y') ?: '-' }}
             •
             {{ $artikel->penulis ?: 'Admin' }}
+            •
+            <i class="far fa-eye"></i> {{ number_format($artikel->view_count ?? 0) }} kali dilihat
         </div>
 
         <img

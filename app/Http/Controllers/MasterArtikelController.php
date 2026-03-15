@@ -20,7 +20,7 @@ class MasterArtikelController extends Controller
 
     public function datatable(Request $request)
     {
-        $query = Artikel::query()->select(['id', 'judul', 'slug', 'status', 'published_at', 'uuid']);
+        $query = Artikel::query()->select(['id', 'judul', 'slug', 'status', 'view_count', 'published_at', 'uuid']);
 
         if ($request->has('search')) {
             $keyword = trim(data_get($request->input('search'), 'value', ''));

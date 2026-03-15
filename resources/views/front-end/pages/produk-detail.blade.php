@@ -243,6 +243,10 @@
             Rp {{ number_format((float) $produk->harga, 0, ',', '.') }}
         </div>
 
+        <div style="color:#64748b; font-size:14px; margin-bottom:14px;">
+            <i class="far fa-eye"></i> {{ number_format($produk->view_count ?? 0) }} kali dilihat
+        </div>
+
         <div class="product-content">
             {!! nl2br(e($produk->ulasan)) !!}
         </div>

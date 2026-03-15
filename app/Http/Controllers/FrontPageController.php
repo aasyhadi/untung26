@@ -28,6 +28,14 @@ class FrontPageController extends Controller
     public function artikelDetail($slug)
     {
         $artikel = Artikel::where('slug', $slug)->where('status', 'publish')->firstOrFail();
+
+        $sessionKey = 'viewed_artikel_' . $artikel->id;
+        if (!session()->has($sessionKey)) {
+            $artikel->increment('view_count');
+            session()->put($sessionKey, true);
+            $artikel->refresh();
+        }
+
         $artikels = Artikel::where('status', 'publish')->where('id', '<>', $artikel->id)->orderByDesc('published_at')->limit(3)->get();
 
         return view('front-end.pages.artikel-detail', compact('artikel', 'artikels'));
@@ -43,7 +51,15 @@ class FrontPageController extends Controller
     public function produkDetail($slug)
     {
         $produk = Produk::where('slug', $slug)->where('status', 'publish')->firstOrFail();
-        $produks = Produk::where('status', 'publish')->where('id', '<>', $produk->id)->orderBy('urutan')->orderByDesc('id')->limit(3)->get();
+
+        $sessionKey = 'viewed_produk_' . $produk->id;
+        if (!session()->has($sessionKey)) {
+            $produk->increment('view_count');
+            session()->put($sessionKey, true);
+            $produk->refresh();
+        }
+
+        $produks = Produk::where('status', 'publish')->where('id', '<>', $produk->id)->orderBy('urutan')->orderByDesc('id')->limit(4)->get();
 
         return view('front-end.pages.produk-detail', compact('produk', 'produks'));
     }

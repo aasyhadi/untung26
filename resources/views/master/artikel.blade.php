@@ -22,6 +22,7 @@
                             <th>Judul</th>
                             <th>Status</th>
                             <th>Publish</th>
+                            <th>Dilihat</th>
                             <th>Publik</th>
                             <th>Actions</th>
                         </tr>
@@ -224,6 +225,7 @@ $(function(){
             {data:'judul',name:'judul'},
             {data:'status_badge',orderable:false,searchable:false},
             {data:'published_at',name:'published_at', render:function(data){ return data ? data : '-'; }},
+            {data:'view_count',name:'view_count'},
             {data:'link_public',orderable:false,searchable:false},
             {data:'action',orderable:false,searchable:false,className:'text-center'}
         ],
