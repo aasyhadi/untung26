@@ -364,7 +364,9 @@ Dashboard
             <div class="col-lg-12">
                 <div class="card dashboard-card">
                     <div class="card-header">
-                        <h5 class="card-title">Grafik View Artikel & Produk (12 Bulan)</h5>
+                        <h5 class="card-title mb-0 fw-bold">
+                            <i class="fas fa-chart-line text-primary me-2"></i>Grafik View Artikel & Produk (12 Bulan)
+                        </h5>
                     </div>
 
                     <div class="card-body">
@@ -380,7 +382,9 @@ Dashboard
         <div class="col-lg-8">
             <div class="card dashboard-card h-100">
                 <div class="card-header">
-                    <h5 class="card-title">Quick Actions</h5>
+                    <h5 class="card-title mb-0 fw-bold">
+                        <i class="fas fa-bolt text-warning me-2"></i>Quick Actions
+                    </h5>
                 </div>
                 <div class="card-body">
                     <div class="quick-grid">
@@ -411,7 +415,9 @@ Dashboard
         <div class="col-lg-4">
             <div class="card dashboard-card h-100">
                 <div class="card-header">
-                    <h5 class="card-title">Status Website</h5>
+                    <h5 class="card-title mb-0 fw-bold">
+                        <i class="fas fa-server text-info me-2"></i>Status Website
+                    </h5>
                 </div>
                 <div class="card-body">
                     <div class="info-list">
@@ -446,7 +452,9 @@ Dashboard
         <div class="col-lg-6">
             <div class="card dashboard-card h-100">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">Konsultasi Terbaru</h5>
+                    <h5 class="card-title mb-0 fw-bold">
+                        <i class="fas fa-comments text-primary me-2"></i>Konsultasi Terbaru
+                    </h5>
                     <a href="{{ url('order-konsultasi') }}" class="section-link">Lihat semua</a>
                 </div>
                 <div class="card-body">
@@ -486,7 +494,9 @@ Dashboard
         <div class="col-lg-6">
             <div class="card dashboard-card h-100">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title mb-0">Jadwal Pelatihan Terdekat</h5>
+                    <h5 class="card-title mb-0 fw-bold">
+                        <i class="fas fa-calendar-alt text-success me-2"></i>Jadwal Pelatihan Terdekat
+                    </h5>
                     <a href="{{ url('jadwal-pelayanan') }}" class="section-link">Kelola</a>
                 </div>
                 <div class="card-body">
@@ -535,7 +545,7 @@ Dashboard
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3">
                                             @if($item->foto)
-                                                <img src="{{ asset('storage/' . $item->foto) }}" class="rounded-3 object-fit-cover" width="48" height="48" alt="thumb">
+                                                <img src="{{ media_url($item->foto) }}" class="rounded-3 object-fit-cover" width="48" height="48" alt="thumb">
                                             @else
                                                 <div class="bg-light rounded-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
                                                     <i class="far fa-image text-muted"></i>
@@ -576,7 +586,7 @@ Dashboard
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3">
                                             @if($item->foto)
-                                                <img src="{{ asset('storage/' . $item->foto) }}" class="rounded-3 object-fit-cover" width="48" height="48" alt="thumb">
+                                                <img src="{{ media_url($item->foto) }}" class="rounded-3 object-fit-cover" width="48" height="48" alt="thumb">
                                             @else
                                                 <div class="bg-light rounded-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
                                                     <i class="fas fa-box text-muted"></i>
