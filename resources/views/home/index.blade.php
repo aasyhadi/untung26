@@ -268,6 +268,18 @@ Dashboard
         text-decoration: underline;
     }
 
+    .line-clamp-1 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .object-fit-cover {
+        object-fit: cover;
+    }
+    .bg-soft-indigo { background-color: #eef2ff; color: #4338ca; }
+    .bg-soft-emerald { background-color: #ecfdf5; color: #047857; }
+
     @media (max-width: 991.98px) {
         .quick-grid {
             grid-template-columns: 1fr;
