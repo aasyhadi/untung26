@@ -7,6 +7,8 @@ use App\Produk;
 use App\Konsultasi;
 use App\JadwalPelatihan;
 use App\SiteSetting;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,7 +25,7 @@ class HomeController extends Controller
             'produk_views' => Produk::sum('view_count'),
         ];
 
-        $latestKonsultasi = Konsultasi::orderByDesc('id')->limit(5)->get();
+        $latestKonsultasi = Konsultasi::where('status', 7)->orderByDesc('id')->limit(5)->get();
         $latestArtikel = Artikel::orderByDesc('id')->limit(5)->get();
         $latestProduk = Produk::orderByDesc('id')->limit(5)->get();
         $nearestJadwal = JadwalPelatihan::whereDate('tanggal', '>=', now()->toDateString())
@@ -42,6 +44,29 @@ class HomeController extends Controller
             ->take(5)
             ->get();
 
+        /* ========================
+        GRAFIK VIEW 12 BULAN
+        ======================== */
+
+        $months = [];
+        $artikelViews = [];
+        $produkViews = [];
+
+        for ($i = 11; $i >= 0; $i--) {
+
+            $date = Carbon::now()->subMonths($i);
+
+            $months[] = $date->format('M Y');
+
+            $artikelViews[] = Artikel::whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->sum('view_count');
+
+            $produkViews[] = Produk::whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->sum('view_count');
+        }
+
         return view('home.index', compact(
             'pagetitle',
             'stats',
@@ -51,7 +76,10 @@ class HomeController extends Controller
             'nearestJadwal',
             'site',
             'topArtikel',
-            'topProduk'
+            'topProduk',
+            'months',
+            'artikelViews',
+            'produkViews'
         ));
    }
 }

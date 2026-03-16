@@ -348,32 +348,16 @@ Dashboard
             </div>
         </div>
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card stat-card">
-                <div class="card-body">
-                    <div class="stat-top">
-                        <div>
-                            <div class="stat-label">View Artikel</div>
-                            <div class="stat-value">{{ number_format($stats['artikel_views']) }}</div>
-                        </div>
-                        <div class="stat-chip chip-indigo">VIEW</div>
+        <div class="row g-3 mb-4">
+            <div class="col-lg-12">
+                <div class="card dashboard-card">
+                    <div class="card-header">
+                        <h5 class="card-title">Grafik View Artikel & Produk (12 Bulan)</h5>
                     </div>
-                    <a href="{{ url('master-artikel') }}" class="stat-link">Lihat performa artikel</a>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card stat-card">
-                <div class="card-body">
-                    <div class="stat-top">
-                        <div>
-                            <div class="stat-label">View Produk</div>
-                            <div class="stat-value">{{ number_format($stats['produk_views']) }}</div>
-                        </div>
-                        <div class="stat-chip chip-emerald">VIEW</div>
+                    <div class="card-body">
+                        <canvas id="viewChart" height="100"></canvas>
                     </div>
-                    <a href="{{ url('master-produk') }}" class="stat-link">Lihat performa produk</a>
                 </div>
             </div>
         </div>
@@ -446,49 +430,80 @@ Dashboard
     </div>
 
     <div class="row g-3">
+        <!-- Konsultasi Terbaru -->
         <div class="col-lg-6">
             <div class="card dashboard-card h-100">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Konsultasi Terbaru</h5>
+                    <h5 class="card-title mb-0">Konsultasi Terbaru</h5>
                     <a href="{{ url('order-konsultasi') }}" class="section-link">Lihat semua</a>
                 </div>
                 <div class="card-body">
                     @forelse($latestKonsultasi as $item)
-                        <div class="feed-item">
-                            <div class="feed-title">{{ $item->nama ?: 'Tanpa nama' }}</div>
-                            <div class="feed-meta">
-                                {{ $item->whatsapp ?: '-' }} • {{ $item->tanggal ?: optional($item->created_at)->format('Y-m-d') }}
-                            </div>
-                            <div class="feed-desc">
-                                {{ \Illuminate\Support\Str::limit($item->pertanyaan, 90) }}
-                            </div>
+                    <div class="feed-item">
+                        <div class="feed-title">
+                            {{ $item->nama ?: 'Tanpa nama' }}
                         </div>
+                        <div class="feed-meta">
+                            <span class="me-2">
+                                <i class="fab fa-whatsapp"></i>
+                                {{ $item->whatsapp ?: '-' }}
+                            </span>
+                            <span>
+                                <i class="far fa-calendar"></i>
+                                {{ $item->tanggal ?: optional($item->created_at)->format('Y-m-d') }}
+                            </span>
+                        </div>
+                        <div class="feed-desc">
+                            {{ \Illuminate\Support\Str::limit($item->pertanyaan, 90) }}
+                        </div>
+                    </div>
+
                     @empty
-                        <div class="empty-state">Belum ada konsultasi.</div>
+
+                    <div class="empty-state">
+                        Belum ada konsultasi masuk.
+                    </div>
+
                     @endforelse
+
                 </div>
             </div>
         </div>
 
+        <!-- Jadwal Pelatihan -->
         <div class="col-lg-6">
             <div class="card dashboard-card h-100">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="card-title">Jadwal Pelatihan Terdekat</h5>
+                    <h5 class="card-title mb-0">Jadwal Pelatihan Terdekat</h5>
                     <a href="{{ url('jadwal-pelayanan') }}" class="section-link">Kelola</a>
                 </div>
                 <div class="card-body">
                     @forelse($nearestJadwal as $item)
-                        <div class="feed-item">
-                            <div class="feed-title">{{ $item->nama_pelatihan }}</div>
-                            <div class="feed-meta">
-                                {{ $item->tanggal }} • {{ $item->lokasi ?: 'Lokasi menyusul' }}
-                            </div>
-                            <div class="feed-desc">
-                                {{ $item->narasumber ?: 'Narasumber belum diisi' }}
-                            </div>
+                    <div class="feed-item">
+                        <div class="feed-title">
+                            {{ $item->nama_pelatihan }}
                         </div>
+                        <div class="feed-meta">
+                            <span class="me-2">
+                                <i class="far fa-calendar"></i>
+                                {{ $item->tanggal }}
+                            </span>
+                            <span>
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{ $item->lokasi ?: 'Lokasi menyusul' }}
+                            </span>
+                        </div>
+                        <div class="feed-desc">
+                            {{ $item->narasumber ?: 'Narasumber belum diisi' }}
+                        </div>
+                    </div>
+
                     @empty
-                        <div class="empty-state">Belum ada jadwal aktif.</div>
+
+                    <div class="empty-state">
+                        Belum ada jadwal pelatihan aktif.
+                    </div>
+
                     @endforelse
                 </div>
             </div>
@@ -496,48 +511,143 @@ Dashboard
 
         <div class="row g-3 mt-1">
             <div class="col-lg-6">
-                <div class="card dashboard-card h-100">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">Artikel Terpopuler</h5>
-                        <a href="{{ url('master-artikel') }}" class="section-link">Kelola</a>
+                <div class="card dashboard-card h-100 border-0 shadow-sm">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0 fw-bold"><i class="fas fa-fire text-danger me-2"></i>Artikel Terpopuler</h5>
+                        <a href="{{ url('master-artikel') }}" class="btn btn-sm btn-light text-primary fw-bold">Kelola</a>
                     </div>
-                    <div class="card-body">
-                        @forelse($topArtikel as $item)
-                            <div class="feed-item">
-                                <div class="feed-title">{{ $item->judul }}</div>
-                                <div class="feed-meta">
-                                    <i class="far fa-eye"></i> {{ number_format($item->view_count ?? 0) }} kali dilihat
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            @forelse($topArtikel as $item)
+                                <div class="list-group-item list-group-item-action border-0 px-4 py-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 me-3">
+                                            @if($item->foto)
+                                                <img src="{{ asset('storage/' . $item->foto) }}" class="rounded-3 object-fit-cover" width="48" height="48" alt="thumb">
+                                            @else
+                                                <div class="bg-light rounded-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                                    <i class="far fa-image text-muted"></i>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="flex-grow-1 me-2">
+                                            <div class="fw-bold text-dark mb-0 line-clamp-1">{{ $item->judul }}</div>
+                                            <small class="text-muted" style="font-size: 11px;">
+                                                <i class="far fa-clock me-1"></i>{{ $item->created_at->format('d M Y') }}
+                                            </small>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-soft-indigo text-indigo rounded-pill px-2 py-1">
+                                                <i class="far fa-eye me-1"></i>{{ number_format($item->view_count ?? 0) }}
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        @empty
-                            <div class="empty-state">Belum ada data artikel populer.</div>
-                        @endforelse
+                            @empty
+                                <div class="p-5 text-center text-muted">Belum ada data artikel.</div>
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-6">
-                <div class="card dashboard-card h-100">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">Produk Terpopuler</h5>
-                        <a href="{{ url('master-produk') }}" class="section-link">Kelola</a>
+                <div class="card dashboard-card h-100 border-0 shadow-sm">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0 fw-bold"><i class="fas fa-shopping-bag text-success me-2"></i>Produk Terpopuler</h5>
+                        <a href="{{ url('master-produk') }}" class="btn btn-sm btn-light text-primary fw-bold">Kelola</a>
                     </div>
-                    <div class="card-body">
-                        @forelse($topProduk as $item)
-                            <div class="feed-item">
-                                <div class="feed-title">{{ $item->judul }}</div>
-                                <div class="feed-meta">
-                                    <i class="far fa-eye"></i> {{ number_format($item->view_count ?? 0) }} kali dilihat
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush">
+                            @forelse($topProduk as $item)
+                                <div class="list-group-item list-group-item-action border-0 px-4 py-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 me-3">
+                                            @if($item->foto)
+                                                <img src="{{ asset('storage/' . $item->foto) }}" class="rounded-3 object-fit-cover" width="48" height="48" alt="thumb">
+                                            @else
+                                                <div class="bg-light rounded-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                                                    <i class="fas fa-box text-muted"></i>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="flex-grow-1 me-2">
+                                            <div class="fw-bold text-dark mb-0 line-clamp-1">{{ $item->judul }}</div>
+                                            <div class="text-success fw-bold small">Rp {{ number_format($item->harga ?? 0, 0, ',', '.') }}</div>
+                                        </div>
+                                        <div class="text-end">
+                                            <span class="badge bg-soft-emerald text-emerald rounded-pill px-2 py-1">
+                                                <i class="far fa-eye me-1"></i>{{ number_format($item->view_count ?? 0) }}
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        @empty
-                            <div class="empty-state">Belum ada data produk populer.</div>
-                        @endforelse
+                            @empty
+                                <div class="p-5 text-center text-muted">Belum ada data produk.</div>
+                            @endforelse
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const labels = {!! json_encode($months) !!};
+const artikelData = {!! json_encode($artikelViews) !!};
+const produkData = {!! json_encode($produkViews) !!};
+
+const ctx = document.getElementById('viewChart').getContext('2d');
+
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [
+
+        {
+            label: 'View Artikel',
+            data: artikelData,
+            borderColor: '#6366f1',
+            backgroundColor: 'rgba(99,102,241,0.1)',
+            tension: 0.4,
+            fill: true
+        },
+
+        {
+            label: 'View Produk',
+            data: produkData,
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,0.1)',
+            tension: 0.4,
+            fill: true
+        }
+
+        ]
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+            legend: {
+                position: 'top'
+            }
+        },
+
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+
+    }
+});
+
+</script>
+
 @endsection
