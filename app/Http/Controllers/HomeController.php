@@ -58,12 +58,20 @@ class HomeController extends Controller
 
             $months[] = $date->format('M Y');
 
-            $artikelViews[] = Artikel::whereYear('created_at', $date->year)
+            /*$artikelViews[] = Artikel::whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
                 ->sum('view_count');
 
             $produkViews[] = Produk::whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
+                ->sum('view_count'); */
+
+            // ✅ AKUMULASI ARTIKEL
+            $artikelViews[] = Artikel::whereDate('created_at', '<=', $date->copy()->endOfMonth())
+                ->sum('view_count');
+
+            // ✅ AKUMULASI PRODUK
+            $produkViews[] = Produk::whereDate('created_at', '<=', $date->copy()->endOfMonth())
                 ->sum('view_count');
         }
 
