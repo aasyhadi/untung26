@@ -203,7 +203,7 @@
 
     .service-grid {
         display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 18px;
     }
 
@@ -747,29 +747,20 @@
         </div>
 
         <div class="service-grid">
-            <a class="service-card" href="{{ url('/layanan/konsultasi') }}">
-                <i class="fas fa-comments"></i>
-                <div>Konsultasi</div>
-            </a>
 
-            <a class="service-card" href="{{ url('/layanan/pelatihan') }}">
-                <i class="fas fa-chalkboard-teacher"></i>
-                <div>Pelatihan</div>
-            </a>
-
-            <a class="service-card" href="{{ url('/layanan/sertifikasi') }}">
-                <i class="fas fa-certificate"></i>
-                <div>Sertifikasi</div>
-            </a>
-
-            <a class="service-card" href="{{ url('/layanan/narasumber') }}">
-                <i class="fas fa-microphone"></i>
-                <div>Narasumber</div>
+            <a class="service-card" href="{{ url('/artikel-konstruksi') }}">
+                <i class="fas fa-newspaper"></i>
+                <div>Artikel</div>
             </a>
 
             <a class="service-card" href="{{ url('/produk') }}">
                 <i class="fas fa-box-open"></i>
                 <div>Produk</div>
+            </a>
+
+            <a class="service-card" href="{{ url('/layanan/konsultasi') }}">
+                <i class="fas fa-comments"></i>
+                <div>Konsultasi</div>
             </a>
         </div>
     </section>
