@@ -16,6 +16,7 @@ Route::get('/artikel-konstruksi', 'FrontPageController@artikels');
 Route::get('/artikel-konstruksi/{slug}', 'FrontPageController@artikelDetail');
 Route::get('/produk', 'FrontPageController@produks');
 Route::get('/produk/{slug}', 'FrontPageController@produkDetail');
+Route::get('/jadwal-pelatihan', 'FrontPageController@jadwalPelatihan');
 
 
 Route::get('/media/{path}', function ($path) {

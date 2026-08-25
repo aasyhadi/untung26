@@ -63,4 +63,21 @@ class FrontPageController extends Controller
 
         return view('front-end.pages.produk-detail', compact('produk', 'produks'));
     }
+
+    public function jadwalPelatihan()
+    {
+        $jadwalPelatihan = JadwalPelatihan::orderByRaw(
+            "CASE
+                WHEN tanggal >= CURDATE() THEN 0
+                ELSE 1
+            END"
+        )
+        ->orderBy('tanggal', 'asc')
+        ->paginate(8);
+
+        return view(
+            'front-end.pages.jadwal-pelatihan',
+            compact('jadwalPelatihan')
+        );
+    }
 }

@@ -203,7 +203,7 @@
 
     .service-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 18px;
     }
 
@@ -762,6 +762,11 @@
                 <i class="fas fa-comments"></i>
                 <div>Konsultasi</div>
             </a>
+
+            <a class="service-card" href="{{ url('/jadwal-pelatihan') }}">
+                <i class="fas fa-graduation-cap"></i>
+                <div>Pelatihan</div>
+            </a>
         </div>
     </section>
 
@@ -771,6 +776,9 @@
                 <h2>Jadwal layanan & pelatihan</h2>
                 <p>Agenda pelatihan terbaru dan informasi seminar online (webinar).</p>
             </div>
+            <a href="{{ url('/jadwal-pelatihan') }}">
+                Lihat semua
+            </a>
         </div>
 
         <div class="schedule-grid">
